@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -35,4 +30,78 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* my css */
+html{
+  background-color:white;
+}
+body {
+  padding: 30px;
+  width: 80%;
+  margin: auto;
+  background-color: lightgray;
+  min-height: 100vh;
+}
+nav{
+  height:80px;
+}
+h1{
+  text-align:center;
+}
+a{
+  color:black;
+  cursor:pointer;
+}
+a:hover{
+  color:white;
+}
+
+input,select {
+  padding: 8px;
+}
+
+p {
+  font-size: 16px;
+}
+
+input[type=button], input[type=submit], select {
+  width: 80px;
+}
+
+.custom-width {
+  width: 160px !important;
+  height: 40px;
+}
+
+.header-table {
+  align-items: center;
+  padding: unset;
+  height: 44px;
+  font-weight: 700;
+  border-bottom: solid black 1px;
+}
+
+form {
+  padding: 0px;
+}
+
+.data {
+  width: 80%;
+}
+select {
+  width: 197px;
+  height: 44px;
+}
+.multiple-select{
+  height:auto;
+}
+.display-language{
+  display:flex;
+  flex-direction:row;
+}
+
+/* span which have put-komma class and me-1 class*/
+span.put-komma.me-1:last-child { 
+display:none;
 }
