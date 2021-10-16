@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
 import { Table } from './Table';
+import { useApp } from './useApp';
 
 function App() {
+   const {people} = useApp(); 
   return (
     <div>
       <h1 className="align-text-center">Welcome to People's records</h1>
@@ -80,7 +82,7 @@ function App() {
             <div className="col-md-1"></div>
             <div className="col-md-1"></div>
         </div>
-        <Table />
+        <Table people={people}/>
 
     </div>
     </div>
