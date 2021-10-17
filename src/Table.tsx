@@ -1,5 +1,5 @@
 
-import { Person } from "./useApp";
+import { Language, Person } from "./useApp";
 
 export function Table (props:{people:Person []}){
   
@@ -10,12 +10,13 @@ export function Table (props:{people:Person []}){
         <div className="row border border-2 py-2">
               <div className="col-md-1">{person.id}</div>
               <div className="col-md-1">{person.name}</div>
-              <div className="col-md-2">{person.city}</div>
+              <div className="col-md-2">{person.city.name}</div>
+              <div className="col-md-2">{person.country.name}</div>
               <div className="col-md-4 display-language">
               {
-                person.languages.map((language: string, index:number)=>{
+                person.languages.map((language: Language, index:number)=>{
                   
-                  return <span className={language}>{ index ? ", " : "" }{language}</span>
+                  return <span className={language.name}>{ index ? ", " : "" }{language.name}</span>
                   }
                 )  
               }    
