@@ -34,13 +34,11 @@ export function useApp(){
       //get countries
       const countries = data.countries.$values
       setCountries(countries)
-      console.log(countries)
       //get languages
       const languages = data.languages.$values
       setLanguages(languages)
       //get people
       const peoples = data.people.$values
-      console.log("people: ",peoples)
       //replace Ids with actual value before setting people
       const people = peoples.map((d:any)=>{
         const person = {} as Person;

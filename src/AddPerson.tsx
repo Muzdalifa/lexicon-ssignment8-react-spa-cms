@@ -1,10 +1,37 @@
 import { City, Country, Language } from "./useApp";
-
+type CreatePersonViewModel = {Name:string, City:string, Languages:number [], PhoneNumber:string}
 function useAddPerson(){
   function sendData(){
-    console.log("send data")
+    //collecting values from addPerson form
+    const nameInput = document.getElementById("name") as HTMLInputElement
+    const name = nameInput.value
+    const cityOption = document.getElementById("addCity") as HTMLOptionElement
+    const city = cityOption.value
+    const countryOption = document.getElementById("addCountry") as HTMLOptionElement
+    const country = countryOption.value
+    const languageSelect = document.getElementById("addLanguage") as HTMLSelectElement
+    const languages:number[] = []
+    for (let index = 0; index < languageSelect.selectedOptions.length; index++) {
+       languages.push(Number(languageSelect.selectedOptions[index].value)); 
+    }
+    const phoneNumberInput = document.getElementById("phone") as HTMLInputElement
+    const phoneNumber = phoneNumberInput.value
+    console.log("send data", {name, city,country,languages,phoneNumber})
 
+    const body= {name,city,languages,phoneNumber}
+    console.log(JSON.stringify(body))
+    fetch(
+      "https://localhost:44366/reactfrontend",
+      {
+        method:"POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+    )
   }
+
   return {sendData}
 } 
 
@@ -12,9 +39,9 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
   const {sendData} = useAddPerson()
   return <div>
     <form id="create-form" className="p-0">
-        <span asp-validation-for="Person.Name" className="text-danger"></span>
-        <input asp-for="Person.Name" id="name" placeholder="Enter name" className="me-3" />
-        <select asp-for="Person.City" className="me-3" id="addCity">
+        <span  className="text-danger"></span>
+        <input id="name" placeholder="Enter name" className="me-3" />
+        <select className="me-3" id="addCity" >
             <option value="" selected>Select City</option>
             {
               props.cities.map((city:City) =>
@@ -30,7 +57,7 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
               )
             }
         </select>
-        <select asp-for="" className="me-3" id="addLanguage">
+        <select asp-for="" className="me-3" id="addLanguage" multiple>
             <option value="" selected>Select Languages</option>
             {
               props.languages.map((language:Language) =>
