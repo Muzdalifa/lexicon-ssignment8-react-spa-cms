@@ -15,14 +15,6 @@ function App() {
       <AddPerson cities={cities} countries={countries} languages={languages} updateApp={updateApp} />
   </div>
 
-<div className="row py-3">
-    <form asp-controller="People" asp-action="Index" method="get" className="p-0">
-        <label asp-for="Search" className="me-3">Please enter your string to search</label>
-        <input asp-for="Search" className="me-3" />
-        <input type="submit" className="btn btn-secondary" value="Search" />
-    </form>
-</div>
-
 <Details  cities={cities} countries={countries} languages={languages} updateApp={updateApp} />
 
 
