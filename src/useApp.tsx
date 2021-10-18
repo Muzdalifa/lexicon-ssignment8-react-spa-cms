@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { updateStatement } from "typescript";
 
 export type City = { cityId: number, name: string, countryId: number}
 export type Country = { countryId: number, name: string}
 export type Language = { languageId: number, name: string}
+
 
 export type Person = {
   id: number,
@@ -19,6 +21,7 @@ export function useApp(){
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [state, setState] = useState(0);
 
   useEffect(()=>{
     async function getData(){
@@ -45,10 +48,9 @@ export function useApp(){
         person.id = d.personId;
         person.name = d.name;
         person.city = cities.find((x:any) => x.cityId ===d.cityId)
-        console.log("city to :", cities)
+        //console.log("city to :", cities)
         person.country = countries.find((x:any) => x.countryId === person.city.countryId)
         person.phoneNumber = d.phoneNumber;
-        console.log("d: ",d)
         //person.languages  = d.personLanguages.$values.
         person.languages  = d.personLanguages.$values.map(
           (personLanguage:any)=>languages
@@ -61,7 +63,12 @@ export function useApp(){
       setPeople(people);
     }
   getData();
-  },[]);
+  },[state]);
 
-  return {cities,countries, languages, people}
+  function updateApp(){
+    setState((state:number)=>state +1);
+  }
+
+
+  return {cities,countries, languages, people, updateApp}
 }

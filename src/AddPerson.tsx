@@ -1,7 +1,7 @@
 import { City, Country, Language } from "./useApp";
 type CreatePersonViewModel = {Name:string, City:string, Languages:number [], PhoneNumber:string}
-function useAddPerson(){
-  function sendData(){
+function useAddPerson(props:{updateApp:Function}){
+  async function sendData(){
     //collecting values from addPerson form
     const nameInput = document.getElementById("name") as HTMLInputElement
     const name = nameInput.value
@@ -20,7 +20,7 @@ function useAddPerson(){
 
     const body= {name,city,languages,phoneNumber}
     console.log(JSON.stringify(body))
-    fetch(
+    await fetch(
       "https://localhost:44366/reactfrontend",
       {
         method:"POST",
@@ -30,13 +30,13 @@ function useAddPerson(){
         }
       }
     )
+    props.updateApp()
   }
-
   return {sendData}
 } 
 
-export function AddPerson (props:{cities: City [], countries: Country [], languages:Language []}){
-  const {sendData} = useAddPerson()
+export function AddPerson (props:{cities: City [], countries: Country [], languages:Language [], updateApp:Function}){
+  const {sendData} = useAddPerson({updateApp: props.updateApp})
   return <div>
     <form id="create-form" className="p-0">
         <span  className="text-danger"></span>
