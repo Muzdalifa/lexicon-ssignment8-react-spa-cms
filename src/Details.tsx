@@ -65,9 +65,8 @@ export function Details(props:{cities: City [], countries: Country [], languages
   <form id="edit-form" className="p-0">
       <label className="me-3">Person details : </label>
       <input id="editID" name="id" type="hidden" />
-      <span asp-validation-for="EditPerson.Name" className="text-danger"></span>
-      <input asp-for="EditPerson.Name" id="editName" name="name" className="me-3" placeholder="Enter name" />
-      <select asp-for="EditPerson.City" id="selectCity" name="city" className="me-3" placeholder="SElect">
+      <input id="editName" name="name" className="me-3" placeholder="Enter name" required/>
+      <select id="selectCity" name="city" className="me-3" placeholder="SElect" required>
         <option value="" selected>Select City</option>
         {
           props.cities.map((city:City) =>
@@ -75,7 +74,7 @@ export function Details(props:{cities: City [], countries: Country [], languages
           )
         }
       </select>
-      <select asp-for="EditPerson.Languages" className="multiple-select me-3" data-style="btn-default" id="selectLanguage" name="languages" multiple>
+      <select className="multiple-select me-3" data-style="btn-default" id="selectLanguage" name="languages" multiple required>
         <option value="">Select Languages</option>
         {
           props.languages.map((language:Language) =>
@@ -83,8 +82,7 @@ export function Details(props:{cities: City [], countries: Country [], languages
           )
         }
       </select>
-      <span asp-validation-for="EditPerson.PhoneNumber"></span>
-      <input asp-for="EditPerson.PhoneNumber" id="editPhoneNumber" name="phoneNumber" className="me-3" placeholder="Enter phonenumber" />
+      <input  id="editPhoneNumber" name="phoneNumber" className="me-3" placeholder="Enter phonenumber" required/>
       <input type="button" className="btn btn-secondary me-3" id="edit-btn" value="Save" onClick={editPerson}/>
       <input type="button" className="btn btn-secondary" id="delete-btn" value="Delete" onClick={deletePerson}/>
   </form>

@@ -48,10 +48,8 @@ export function useApp(){
         person.id = d.personId;
         person.name = d.name;
         person.city = cities.find((x:any) => x.cityId ===d.cityId)
-        //console.log("city to :", cities)
         person.country = countries.find((x:any) => x.countryId === person.city.countryId)
         person.phoneNumber = d.phoneNumber;
-        //person.languages  = d.personLanguages.$values.
         person.languages  = d.personLanguages.$values.map(
           (personLanguage:any)=>languages
           .find(

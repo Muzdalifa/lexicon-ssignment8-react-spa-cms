@@ -1,7 +1,9 @@
 import { City, Country, Language } from "./useApp";
-type CreatePersonViewModel = {Name:string, City:string, Languages:number [], PhoneNumber:string}
+
 function useAddPerson(props:{updateApp:Function}){
-  async function sendData(){
+  async function sendData(e:any){
+    console.log("eeeeeeee",e)
+    //e.preventDefault()
     //collecting values from addPerson form
     const nameInput = document.getElementById("name") as HTMLInputElement
     const name = nameInput.value
@@ -17,7 +19,7 @@ function useAddPerson(props:{updateApp:Function}){
     const phoneNumberInput = document.getElementById("phone") as HTMLInputElement
     const phoneNumber = phoneNumberInput.value
     console.log("send data", {name, city,country,languages,phoneNumber})
-
+    
     const body= {name,city,languages,phoneNumber}
     console.log(JSON.stringify(body))
     await fetch(
@@ -39,9 +41,8 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
   const {sendData} = useAddPerson({updateApp: props.updateApp})
   return <div>
     <form id="create-form" className="p-0">
-        <span  className="text-danger"></span>
-        <input id="name" placeholder="Enter name" className="me-3" />
-        <select className="me-3" id="addCity" >
+        <input id="name" placeholder="Enter name" className="me-3" required/>
+        <select className="me-3" id="addCity" required>
             <option value="" selected>Select City</option>
             {
               props.cities.map((city:City) =>
@@ -49,7 +50,7 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
               )
             }
         </select>
-        <select asp-for="" className="me-3" id="addCountry">
+        <select className="me-3" id="addCountry" required>
             <option value="" selected>Select Country</option>
             {
               props.countries.map((country:Country) =>
@@ -57,18 +58,21 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
               )
             }
         </select>
-        <select asp-for="" className="me-3" id="addLanguage" multiple>
-            <option value="" selected>Select Languages</option>
+        <select className="me-3" id="addLanguage" multiple required>
+            <option value="" >Select Languages</option>
             {
               props.languages.map((language:Language) =>
               <option value={language.languageId}>{language.name}</option>
               )
             }
         </select>
-        <span asp-validation-for="Person.PhoneNumber" className="text-danger"></span>
-        <input asp-for="Person.PhoneNumber" id="phone" placeholder="Enter phone number" className="me-3" />
-        <input type="button" className="btn btn-secondary me-3" value="Add" onClick={sendData}/>
-        <input type="button" className="btn btn-secondary me-3" value="Reset" id="reset" onClick={console.log} />
+        <input id="phone" placeholder="Enter phone number" className="me-3" required />
+        <input type="submit" className="btn btn-secondary me-3" value="Add" onClick={sendData}/>
+           
+        <input type="submit" className="btn btn-secondary me-3" value="Reset" id="reset" onClick={()=>{
+          //@ts-ignore
+          document?.getElementById("create-form")?.reset()
+        } } />
     </form>
   </div>
 }
