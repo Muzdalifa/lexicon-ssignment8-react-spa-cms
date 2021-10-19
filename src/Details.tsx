@@ -56,9 +56,7 @@ function useDetails(props: {updateApp: Function}){
     )
     props.updateApp();
   }
-
   return {editPerson, deletePerson}
-
 }
 
 export function Details(props:{cities: City [], countries: Country [], languages:Language [], updateApp: Function}){
@@ -89,8 +87,4 @@ export function Details(props:{cities: City [], countries: Country [], languages
       <input type="button" className="btn btn-secondary" id="delete-btn" value="Delete" onClick={deletePerson}/>
   </form>
 </div>
-}
-
-function useApp(): { people: any; cities: any; countries: any; languages: any; updateApp: any; } {
-  throw new Error("Function not implemented.");
 }

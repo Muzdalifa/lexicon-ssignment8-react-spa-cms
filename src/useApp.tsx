@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { updateStatement } from "typescript";
 
 export type City = { cityId: number, name: string, countryId: number}
 export type Country = { countryId: number, name: string}
@@ -66,7 +65,6 @@ export function useApp(){
   function updateApp(){
     setState((state:number)=>state +1);
   }
-
 
   return {cities,countries, languages, people, updateApp}
 }
