@@ -2,8 +2,7 @@ import { City, Country, Language } from "./useApp";
 
 function useAddPerson(props:{updateApp:Function}){
   async function sendData(e:any){
-    console.log("eeeeeeee",e)
-    //e.preventDefault()
+    e.preventDefault()
     //collecting values from addPerson form
     const nameInput = document.getElementById("name") as HTMLInputElement
     const name = nameInput.value
@@ -18,10 +17,9 @@ function useAddPerson(props:{updateApp:Function}){
     }
     const phoneNumberInput = document.getElementById("phone") as HTMLInputElement
     const phoneNumber = phoneNumberInput.value
-    console.log("send data", {name, city,country,languages,phoneNumber})
     
     const body= {name,city,languages,phoneNumber}
-    console.log(JSON.stringify(body))
+    
     await fetch(
       "https://localhost:44366/reactfrontend",
       {
@@ -33,6 +31,7 @@ function useAddPerson(props:{updateApp:Function}){
       }
     )
     props.updateApp()
+    e.target.reset()
   }
   return {sendData}
 } 
@@ -40,7 +39,7 @@ function useAddPerson(props:{updateApp:Function}){
 export function AddPerson (props:{cities: City [], countries: Country [], languages:Language [], updateApp:Function}){
   const {sendData} = useAddPerson({updateApp: props.updateApp})
   return <div>
-    <form id="create-form" className="p-0">
+    <form id="create-form" className="p-0" onSubmit={sendData}>
         <input id="name" placeholder="Enter name" className="me-3" required/>
         <select className="me-3" id="addCity" required>
             <option value="" selected>Select City</option>
@@ -67,12 +66,7 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
             }
         </select>
         <input id="phone" placeholder="Enter phone number" className="me-3" required />
-        <input type="submit" className="btn btn-secondary me-3" value="Add" onClick={sendData}/>
-           
-        <input type="submit" className="btn btn-secondary me-3" value="Reset" id="reset" onClick={()=>{
-          //@ts-ignore
-          document?.getElementById("create-form")?.reset()
-        } } />
+        <input type="submit" className="btn btn-secondary me-3" value="Add"/>
     </form>
   </div>
 }

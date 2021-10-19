@@ -1,7 +1,8 @@
 import { City, Country, Language } from "./useApp";
 
 function useDetails(props: {updateApp: Function}){
-  async function editPerson(){ 
+  async function editPerson(e:any){ 
+    e.preventDefault()
     //collecting values from details form
     const IDInput = document.getElementById("editID") as HTMLInputElement
     const id = IDInput.value
@@ -38,6 +39,7 @@ function useDetails(props: {updateApp: Function}){
       }
     )
     props.updateApp();
+    e.target.reset()
   }
   
   async function deletePerson(){
@@ -62,7 +64,7 @@ function useDetails(props: {updateApp: Function}){
 export function Details(props:{cities: City [], countries: Country [], languages:Language [], updateApp: Function}){
   const {editPerson, deletePerson} = useDetails({updateApp: props.updateApp})
   return <div className="row p-3" id="edit-div">
-  <form id="edit-form" className="p-0">
+  <form id="edit-form" className="p-0" onSubmit={editPerson}>
       <label className="me-3">Person details : </label>
       <input id="editID" name="id" type="hidden" />
       <input id="editName" name="name" className="me-3" placeholder="Enter name" required/>
@@ -83,7 +85,7 @@ export function Details(props:{cities: City [], countries: Country [], languages
         }
       </select>
       <input  id="editPhoneNumber" name="phoneNumber" className="me-3" placeholder="Enter phonenumber" required/>
-      <input type="button" className="btn btn-secondary me-3" id="edit-btn" value="Save" onClick={editPerson}/>
+      <input type="submit" className="btn btn-secondary me-3" id="edit-btn" value="Save"/>
       <input type="button" className="btn btn-secondary" id="delete-btn" value="Delete" onClick={deletePerson}/>
   </form>
 </div>
