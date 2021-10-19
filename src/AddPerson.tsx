@@ -40,7 +40,7 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
   const {sendData} = useAddPerson({updateApp: props.updateApp})
   return <div>
     <form id="create-form" className="p-0" onSubmit={sendData}>
-        <input id="name" placeholder="Enter name" className="me-3" required/>
+        <input id="name" placeholder="Enter name" className="me-3" required pattern="[a-zA-ZåÅÖöÄä]{2,}"/>
         <select className="me-3" id="addCity" required>
             <option value="" selected>Select City</option>
             {
@@ -65,7 +65,7 @@ export function AddPerson (props:{cities: City [], countries: Country [], langua
               )
             }
         </select>
-        <input id="phone" placeholder="Enter phone number" className="me-3" required />
+        <input id="phone" placeholder="Enter phone number" className="me-3" required pattern="\+\d{11,12}"/>
         <input type="submit" className="btn btn-secondary me-3" value="Add"/>
     </form>
   </div>

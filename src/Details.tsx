@@ -67,7 +67,7 @@ export function Details(props:{cities: City [], countries: Country [], languages
   <form id="edit-form" className="p-0" onSubmit={editPerson}>
       <label className="me-3">Person details : </label>
       <input id="editID" name="id" type="hidden" />
-      <input id="editName" name="name" className="me-3" placeholder="Enter name" required/>
+      <input id="editName" name="name" className="me-3" placeholder="Enter name" required pattern="[a-zA-ZåÅÖöÄä]{2,}"/>
       <select id="selectCity" name="city" className="me-3" placeholder="SElect" required>
         <option value="" selected>Select City</option>
         {
@@ -84,7 +84,7 @@ export function Details(props:{cities: City [], countries: Country [], languages
           )
         }
       </select>
-      <input  id="editPhoneNumber" name="phoneNumber" className="me-3" placeholder="Enter phonenumber" required/>
+      <input  id="editPhoneNumber" name="phoneNumber" className="me-3" placeholder="Enter phonenumber" required pattern="\+\d{11,12}"/>
       <input type="submit" className="btn btn-secondary me-3" id="edit-btn" value="Save"/>
       <input type="button" className="btn btn-secondary" id="delete-btn" value="Delete" onClick={deletePerson}/>
   </form>
